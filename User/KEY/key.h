@@ -2,7 +2,7 @@
 #define __KEY_H
 
 #include "stm32f10x.h"
-#include "./OLED/OLED.h"
+
 
 #define KEY1 GPIO_Pin_4
 #define KEY2 GPIO_Pin_5

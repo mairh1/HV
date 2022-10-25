@@ -8,16 +8,19 @@
 */
 void HC595_Init(void)
 {
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB|RCC_APB2Periph_AFIO,ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB|RCC_APB2Periph_GPIOA|RCC_APB2Periph_AFIO,ENABLE);
 	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable,ENABLE);
 	
 	GPIO_InitTypeDef GPIO_InitStructrue;
 	GPIO_InitStructrue.GPIO_Mode		= GPIO_Mode_Out_PP;
 	GPIO_InitStructrue.GPIO_Speed		= GPIO_Speed_50MHz;
 	GPIO_InitStructrue.GPIO_Pin			= SHCP1|STCP1|DIN1|SHCP2|STCP2|DIN2;	
-
 	GPIO_Init(GPIOB,&GPIO_InitStructrue);	
-	//GPIO_SetBits(GPIOB,SHCP1|STCP1|DIN1|SHCP2|STCP2|DIN2);																		
+	
+	GPIO_InitStructrue.GPIO_Pin			= GPIO_Pin_6;	
+	GPIO_Init(GPIOA,&GPIO_InitStructrue);
+	
+	GPIO_ResetBits(GPIOA,GPIO_Pin_6);																		
 }
  
 /*

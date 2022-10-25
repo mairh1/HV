@@ -429,19 +429,9 @@
               <FilePath>..\Library\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f10x_i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Library\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f10x_rcc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Library\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f10x_usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Library\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -467,11 +457,6 @@
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>OLED.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\OLED\OLED.c</FilePath>
             </File>
             <File>
               <FileName>hc595.c</FileName>

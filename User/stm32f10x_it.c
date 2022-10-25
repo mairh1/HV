@@ -24,7 +24,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
 #include "./HC595/hc595.h"
-#include "./OLED/OLED.h"
 #include "./KEY/key.h"
 #include "./ds1302/ds1302.h"
 #include "delay.h"
@@ -171,27 +170,47 @@ void EXTI4_IRQHandler(void)
 	{	
 		while(1)
 		{
+			GPIO_SetBits(GPIOA,GPIO_Pin_6);//设置":"为常亮
+			
 			if(GPIO_ReadInputDataBit(GPIOA,KEY2)==RESET)//修改小时
 			{
+				uint8_t IT_hourT,IT_hourB;
 				IT_hour++;
 				
 				if(IT_hour>23)
 					IT_hour=0;
 				
+				/* 获取595移位数据 */
+				IT_hourT=(IT_hour/10);
+				IT_hourB=(IT_hour%10);
+				
+				/* 辉光管更新显示 */
+				HC595_HOUR_OUTPUT(IT_hourT,IT_hourB);
+				
 				Delay_ms(400);
-			}			
+			}		
+			
 			if(GPIO_ReadInputDataBit(GPIOA,KEY3)==RESET)//修改分钟
 			{
+				uint8_t IT_minuteT,IT_minuteB;
 				IT_minute++;
 				
 				if(IT_minute>59)
 					IT_minute=0;
 				
+				/* 获取595移位数据 */
+				IT_minuteT=(IT_minute/10);
+				IT_minuteB=(IT_minute%10);
+				
+				/* 辉光管更新显示 */
+				HC595_MINNUTE_OUTPUT(IT_minuteT,IT_minuteB);
+
 				Delay_ms(400);
-			}			
+			}	
+			
 			if(GPIO_ReadInputDataBit(GPIOB,KEY4)==RESET)//保存退出
 			{
-				REds1302_Write_data(IT_hour,IT_minute);//写入时间
+				REds1302_Write_data(IT_hour,IT_minute);//DS1302写入新时间时间
 				EXTI_ClearITPendingBit(EXTI_Line4);//清除LINE4上的中断标志位
 				break;
 			}
